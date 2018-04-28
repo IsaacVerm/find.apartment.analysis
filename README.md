@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.org/IsaacVerm/find.apartment.analysis.svg?branch=master)](https://travis-ci.org/IsaacVerm/find.apartment.analysis)
