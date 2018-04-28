@@ -1,9 +1,9 @@
 Package: find.apartment.analysis
-Title: What the Package Does (one line, title case)
+Title: Analyse Immoweb data to find a new appartment to rent.
 Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: person("Isaac", "Verminck", email = "isaacverm@gmail.com", role = c("aut", "cre"))
+Description: Analyse Immoweb data to find a new appartment to rent.
 Depends: R (>= 3.4.2)
-License: What license is it under?
+License: GPL-2
 Encoding: UTF-8
 LazyData: true
