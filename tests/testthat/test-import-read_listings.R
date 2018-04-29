@@ -1,4 +1,4 @@
-context("read_listings") 
+context("read_listings")
 
 listings <- read_listings()
 

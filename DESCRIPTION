@@ -8,6 +8,8 @@ License: GPL-2
 Encoding: UTF-8
 LazyData: true
 Imports:
-    here
+    here,
+    dplyr,
+    stringr
 Suggests: testthat
 RoxygenNote: 6.0.1

@@ -1,8 +1,20 @@
 #' @import stringr
-extract_digits <- function(variable_with_text, regex = "\\d+") {
-  str_extract(variable_with_text, regex)
+extract_digits <- function(raw_variable, regex = "\\d+") {
+  as.numeric(str_extract(raw_variable, regex))
 }
 
-extract_postcode <- function(address) {
-  extract_digits(address, "\\d{4}")
+#' @import purrr
+extract_digit_variables <- function(listings, digit_variables) {
+  digit_variables %>%
+    map(~extract_digits(raw_variable = listings[[.]])) %>%
+    as.data.frame %>%
+    setNames(digit_variables)
+}
+
+#' #' @import dplyr
+extract_postcode <- function(listings) {
+    extract_digits(raw_variable = listings[["address"]],
+                                        regex = "\\d{4}") %>%
+    as.data.frame %>%
+    setNames("postcode")
 }
