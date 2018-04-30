@@ -1,7 +1,7 @@
 #' @import dplyr
 correct_data_types <- function(listings) {
-  numeric_variables <- c("postcode","construction_year","floors", "habitable_area", "rent", "charges", "energy_consumption")
-  factor_variables <- "current_state"
+  numeric_variables <- c("construction_year","floors", "habitable_area", "rent", "charges", "energy_consumption")
+  factor_variables <- c("current_state","postcode")
   date_variables <- "availability_date"
 
   listings %>%

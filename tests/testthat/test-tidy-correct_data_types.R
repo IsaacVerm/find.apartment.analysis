@@ -6,7 +6,7 @@ listings <- read_listings() %>%
   correct_data_types
 
 test_that("some variables are numeric", {
-  numeric_variables <- c("postcode","construction_year","floors", "habitable_area", "rent", "charges", "energy_consumption")
+  numeric_variables <- c("construction_year","floors", "habitable_area", "rent", "charges", "energy_consumption")
 
   nr_of_numeric_variables <- listings %>%
     select(one_of(numeric_variables)) %>%
@@ -18,8 +18,9 @@ test_that("some variables are numeric", {
   expect_equal(first(nr_of_numeric_variables), length(numeric_variables))
 })
 
-test_that("current_state is a factor", {
+test_that("current_state and postcode are factors", {
   expect_is(listings$current_state, "factor")
+  expect_is(listings$postcode, "factor")
 })
 
 test_that("availability_date is a date", {
