@@ -7,5 +7,5 @@ correct_data_types <- function(listings) {
   listings %>%
     mutate_at(numeric_variables, funs(as.numeric)) %>%
     mutate_at(factor_variables, funs(factor)) %>%
-    mutate_at(date_variables, funs(as.Date))
+    mutate_at(date_variables, funs(as.Date(., format = "%d/%m/%Y")))
 }

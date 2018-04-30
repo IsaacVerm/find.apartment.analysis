@@ -5,5 +5,6 @@ state_to_english <- function(listings) {
                                   "Goede staat" = "good",
                                   "Op te frissen" = "to be renovated",
                                   "Uitstekende staat" = "excellent",
-                                  "Vernieuwd" = "renovated"))
+                                  "Vernieuwd" = "renovated",
+                                  .default = NA_character_))
 }
