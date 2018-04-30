@@ -17,19 +17,19 @@ test_that("returns dataframe", {
   expect_is(extracted_digits, "data.frame")
 })
 
-test_that("contains only digit variables", {
-  expect_length(extracted_digits, length(digit_variables))
+test_that("contains the same variables as the input listings", {
+  expect_equal(names(listings), names(extracted_digits))
 })
 
-test_that("all variables are numeric", {
+test_that("all digit variables are numeric", {
   type_of_variables <- extracted_digits %>%
+    select(one_of(digit_variables)) %>%
     summarise_all(typeof) %>%
     gather %>%
     pull(value) %>%
     table
 
   expect_named(type_of_variables, c("double"))
-  expect_equal(first(type_of_variables), ncol(extracted_digits))
 })
 
 context("extract_postcode")
@@ -40,8 +40,9 @@ test_that("returns dataframe", {
   expect_is(listings_with_postcode, "data.frame")
 })
 
-test_that("contains only one variable postcode", {
-  expect_equal(names(listings_with_postcode), c("postcode"))
+test_that("contains the same variables as the input listings except for postcode", {
+  expect_equal(names(listings),
+               recode(names(extracted_digits), "postcode" = "address"))
 })
 
 test_that("postcode is 4 digits", {

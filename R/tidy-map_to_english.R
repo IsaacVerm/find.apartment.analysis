@@ -1,8 +1,9 @@
 #' @import dplyr
-state_to_english <- function(state_in_dutch) {
-  recode(state_in_dutch,
-         "Goede staat" = "good",
-         "Op te frissen" = "to be renovated",
-         "Uitstekende staat" = "excellent",
-         "Vernieuwd" = "renovated")
+state_to_english <- function(listings) {
+  listings %>%
+    mutate(current_state = recode(current_state,
+                                  "Goede staat" = "good",
+                                  "Op te frissen" = "to be renovated",
+                                  "Uitstekende staat" = "excellent",
+                                  "Vernieuwd" = "renovated"))
 }
