@@ -3,7 +3,8 @@ extract_digits <- function(raw_variable, regex = "\\d+") {
   as.numeric(str_extract(raw_variable, regex))
 }
 
-#' @import purrr, dplyr
+#' @import dplyr
+#' @import purrr
 extract_digit_variables <- function(listings,
                                     digit_variables = c("habitable_area","rent","charges","energy_consumption")) {
   df_digit_variables <- digit_variables %>%

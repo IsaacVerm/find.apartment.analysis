@@ -1,6 +1,6 @@
 context("correct_data_types")
 
-listings <- read_listings() %>%
+listings <- read_raw_listings() %>%
   extract_digit_variables %>%
   extract_postcode %>%
   correct_data_types

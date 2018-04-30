@@ -1,6 +1,6 @@
-context("read_listings")
+context("read_raw_listings")
 
-listings <- read_listings()
+listings <- read_raw_listings()
 
 test_that("reads as dataframe", {
   expect_is(listings, "data.frame")

@@ -27,7 +27,7 @@ Importing is easy:
 
 ```{r}
 
-listings <- read_listings()
+listings <- read_raw_listings()
 
 ```
 

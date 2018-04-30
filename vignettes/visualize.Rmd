@@ -12,6 +12,8 @@ vignette: >
 ```{r setup, include=FALSE}
 
 library(knitr)
+library(ggplot2)
+library(dplyr)
 
 opts_chunk$set(echo=TRUE,
                warning=FALSE,
@@ -21,3 +23,77 @@ opts_chunk$set(echo=TRUE,
 devtools::load_all(here::here())
 
 ```
+
+```{r load}
+
+read_tidy_listings()
+
+```
+
+# Rental prices by muncipality
+
+We want to know if some muncipalities are more expensive than others. Of course we want to avoid comparing apples and oranges so we first have to find out what variables influence the price per square meter. For example the current state could make a large difference (people will pay more for a recently renovated appartement than they would for a appartement to be renovated).
+
+The variables in our data having a possible influence are the current state, the energy consumption level and the construction year. Current state is categorical, the other two are continuous.
+
+We start off with a naive approach where we don't take any confounding variables into account and we gradually peel back confounding variables.
+
+## Energy consumption
+
+```{r influence_energy_consumption}
+
+ggplot(data = tidy_listings,
+       aes(x = energy_consumption, y = price_per_square_m)) +
+  geom_point()
+
+```
+
+Energy consumption doesn't seem to have a large influence on the final price.
+
+## Construction year
+
+```{r influence_construction_year}
+
+ggplot(data = tidy_listings,
+       aes(x = construction_year, y = price_per_square_m)) +
+  geom_point()
+
+```
+
+Construction year doesn't seem to have too much of an influence either.
+
+## Current state
+
+```{r influence_current_state}
+
+df_influence_current_state <- tidy_listings %>%
+  filter(!is.na(current_state)) %>% 
+  group_by(current_state) %>% 
+  summarise(avg_price_per_square_m = mean(price_per_square_m, na.rm = TRUE))
+
+ggplot(data = df_influence_current_state,
+       aes(x = current_state, y = avg_price_per_square_m)) +
+  geom_col()
+```
+
+People don't seem to appreciate a great difference between apartments that are in a good state or in an excellent state. The only influence we notice is for apartments to be renovated, but there aren't enough of those to make any valid conclusions.
+
+## Muncipality
+
+```{r influence_muncipality}
+
+df_influence_muncipality <- tidy_listings %>%
+  filter(!is.na(muncipality)) %>% 
+  group_by(muncipality) %>% 
+  summarise(avg_price_per_square_m = mean(price_per_square_m, na.rm = TRUE)) %>% 
+  arrange(avg_price_per_square_m) %>% 
+  mutate(muncipality = factor(x = muncipality, levels = muncipality)) # so muncipality is displayed in order of price
+
+ggplot(data = df_influence_muncipality,
+       aes(x = muncipality, y = avg_price_per_square_m)) +
+  geom_col() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+```
+
+

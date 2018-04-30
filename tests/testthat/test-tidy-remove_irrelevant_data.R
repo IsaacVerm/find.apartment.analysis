@@ -1,4 +1,4 @@
-listings <- read_listings()
+listings <- read_raw_listings()
 
 context("extract_digits")
 

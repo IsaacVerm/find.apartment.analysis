@@ -1,6 +1,6 @@
 context("state_to_english")
 
-listings <- read_listings() %>%
+listings <- read_raw_listings() %>%
   state_to_english
 
 test_that("returns state of building in English", {

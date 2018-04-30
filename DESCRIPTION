@@ -10,7 +10,10 @@ LazyData: true
 Imports:
     here,
     dplyr,
-    stringr
+    stringr,
+    purrr,
+    ggplot2,
+    tidyr
 Suggests: testthat,
     knitr,
     rmarkdown
